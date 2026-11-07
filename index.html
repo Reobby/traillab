@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth dark">
+<html lang="de" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrailLab & LineCheck – MTB Physics, Spots & Bike Finder</title>
-    <!-- Tailwind CSS CDN -->
+    <title>TrailLab & LineCheck | Engineering & Bikepark Platform</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -12,1004 +12,545 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            dark: '#0b0f19',
-                            card: '#131c2e',
+                        cyber: {
+                            bg: '#0a0d14',
+                            card: '#121824',
                             border: '#1e293b',
-                            neon: '#00ff88',
-                            blue: '#3b82f6',
-                            cyan: '#00e5ff',
-                            black: '#070a10'
+                            neon: '#00ffcc',
+                            accent: '#ff0055',
+                            blue: '#00b8ff'
                         }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['Impact', 'sans-serif']
                     }
                 }
             }
         }
     </script>
-    <!-- FontAwesome & Google Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #070a10; color: #f8fafc; }
-        .glass-card { background: rgba(19, 28, 46, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .glass-card:hover { border-color: rgba(0, 255, 136, 0.3); }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #070a10; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #00ff88; }
+        body {
+            background-color: #0a0d14;
+            color: #f8fafc;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .glow-neon { box-shadow: 0 0 20px rgba(0, 255, 204, 0.25); }
+        .glass-panel {
+            background: rgba(18, 24, 36, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
     </style>
 </head>
-<body class="bg-brand-black text-slate-100 min-h-screen selection:bg-brand-neon selection:text-brand-dark">
+<body class="min-h-screen flex flex-col justify-between selection:bg-cyber-neon selection:text-black">
 
-    <!-- TOP NAVIGATION BAR -->
-    <header class="sticky top-0 z-50 glass-card border-b border-brand-border/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-neon to-brand-blue flex items-center justify-center text-brand-dark font-black text-xl shadow-lg shadow-brand-neon/20">
-                    <i class="fa-solid fa-person-biking"></i>
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-cyber-border/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="p-2.5 bg-cyber-neon/10 border border-cyber-neon/30 rounded-xl">
+                        <i data-lucide="bike" class="w-7 h-7 text-cyber-neon"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black tracking-wider text-white">TRAILLAB</span>
+                        <span class="block text-xs font-semibold text-cyber-neon tracking-widest uppercase">& LineCheck Lab</span>
+                    </div>
                 </div>
-                <div>
-                    <span class="font-heading text-2xl tracking-wider uppercase bg-gradient-to-r from-white via-slate-200 to-brand-neon bg-clip-text text-transparent">TrailLab</span>
-                    <span class="block text-[10px] text-brand-neon uppercase font-mono tracking-widest">&amp; LineCheck Lab</span>
-                </div>
-            </div>
 
-            <!-- Nav Links -->
-            <nav class="hidden lg:flex items-center space-x-5 text-xs font-medium text-slate-300">
-                <a href="#jump-calculator" class="hover:text-brand-neon transition flex items-center"><i class="fa-solid fa-calculator mr-1.5 text-brand-neon"></i>Jump Physics</a>
-                <a href="#bikepark-explorer" class="hover:text-brand-cyan transition flex items-center"><i class="fa-solid fa-map-location-dot mr-1.5 text-brand-cyan"></i>Bikeparks (12+)</a>
-                <a href="#bike-finder" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-sliders mr-1.5 text-brand-blue"></i>Bike Finder</a>
-                <a href="#suspension-lab" class="hover:text-emerald-400 transition flex items-center"><i class="fa-solid fa-gauge-high mr-1.5 text-emerald-400"></i>Suspension Lab</a>
-                <a href="#monetization-guide" class="hover:text-amber-400 transition flex items-center"><i class="fa-solid fa-sack-dollar mr-1.5 text-amber-400"></i>Geld Verdienen Guide</a>
-                <a href="#pro-membership" class="hover:text-rose-400 transition flex items-center"><i class="fa-solid fa-crown mr-1.5 text-rose-400"></i>Pro Member</a>
-            </nav>
+                <nav class="hidden md:flex items-center gap-6 font-medium text-sm">
+                    <a href="#jump-calculator" class="text-gray-300 hover:text-cyber-neon transition flex items-center gap-2"><i data-lucide="calculator" class="w-4 h-4"></i> Jump Physics</a>
+                    <a href="#spots" class="text-gray-300 hover:text-cyber-neon transition flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> Spots & Parks</a>
+                    <a href="#bike-finder" class="text-gray-300 hover:text-cyber-neon transition flex items-center gap-2"><i data-lucide="sliders" class="w-4 h-4"></i> Bike Finder</a>
+                    <a href="#suspension" class="text-gray-300 hover:text-cyber-neon transition flex items-center gap-2"><i data-lucide="gauge" class="w-4 h-4"></i> Suspension Lab</a>
+                    <a href="#pro-member" class="text-gray-300 hover:text-cyber-neon transition flex items-center gap-2"><i data-lucide="heart" class="w-4 h-4 text-cyber-accent"></i> Entwickler Unterstützen</a>
+                </nav>
 
-            <!-- Auth Profile Section -->
-            <div class="flex items-center space-x-3">
-                <div id="auth-status" class="hidden items-center space-x-2 bg-brand-dark px-3 py-1.5 rounded-full border border-brand-border text-xs">
-                    <img id="user-avatar" src="https://placehold.co/32x32/131c2e/00ff88?text=U" class="w-6 h-6 rounded-full" alt="Avatar">
-                    <span id="user-name" class="font-bold text-white">Rider</span>
+                <div class="flex items-center gap-4">
+                    <button id="auth-btn" onclick="openAuthModal()" class="px-4 py-2 bg-cyber-card border border-cyber-border hover:border-cyber-neon text-white text-sm font-bold rounded-xl transition flex items-center gap-2">
+                        <i data-lucide="user" class="w-4 h-4 text-cyber-neon"></i> <span id="auth-btn-text">Google Login</span>
+                    </button>
+                    <a href="#pro-member" class="px-5 py-2.5 bg-cyber-neon text-black font-bold rounded-xl hover:bg-cyber-neon/90 transition shadow-lg shadow-cyber-neon/20 flex items-center gap-2 text-sm">
+                        <i data-lucide="heart" class="w-4 h-4"></i> Supporter Werden
+                    </a>
                 </div>
-                <button id="google-login-btn" onclick="loginWithGoogle()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-brand-neon to-brand-cyan text-brand-dark font-extrabold text-xs uppercase tracking-wider hover:opacity-95 shadow-lg shadow-brand-neon/10 transition">
-                    <i class="fa-brands fa-google mr-2"></i>Google Login
-                </button>
             </div>
         </div>
     </header>
 
-    <!-- MAIN CONTAINER -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-20">
-
-        <!-- HERO SECTION -->
-        <section class="glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden border border-brand-border">
-            <div class="absolute -right-20 -top-20 w-96 h-96 bg-brand-neon/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div class="relative z-10 max-w-3xl space-y-6">
-                <div class="inline-flex items-center space-x-2 bg-brand-neon/10 border border-brand-neon/30 px-3 py-1 rounded-full text-brand-neon text-xs font-bold uppercase tracking-wider">
-                    <i class="fa-solid fa-bolt"></i>
-                    <span>Next-Gen MTB Engineering &amp; Spot Analytics</span>
-                </div>
-                <h1 class="font-heading text-5xl sm:text-7xl font-extrabold tracking-wide uppercase text-white leading-none">
-                    Master Deinen Airtime &amp; <span class="bg-gradient-to-r from-brand-neon to-brand-cyan bg-clip-text text-transparent">Trail-Setup</span>
+    <!-- HERO SECTION -->
+    <section class="relative py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel p-8 sm:p-12 rounded-3xl relative z-10 border border-cyber-neon/20 glow-neon">
+                <span class="px-3 py-1 bg-cyber-neon/10 border border-cyber-neon/30 text-cyber-neon text-xs font-bold rounded-full uppercase tracking-widest inline-block mb-4">Physics & Engineering Platform</span>
+                <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-none mb-6">
+                    MEISTERE DEINEN AIRTIME & <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-neon to-cyber-blue">TRAIL-SETUP</span>
                 </h1>
-                <p class="text-sm sm:text-base text-slate-300 font-normal leading-relaxed">
-                    Berechne exakte Sprung-Trajektorien und Landungs-Baupläne, finde das perfekte Bikepark-Setup und verwalte deine Downhill- &amp; Freeride-Geometrien in Echtzeit.
+                <p class="text-gray-400 text-lg max-w-2xl mb-8 leading-relaxed">
+                    Berechne exakte Sprung-Trajektorien, simuliere Landungen für Kicker, finde das perfekte Bikepark-Setup und vergleiche Geometrien in Echtzeit.
                 </p>
-                <div class="flex flex-wrap gap-4 pt-2">
-                    <a href="#jump-calculator" class="px-6 py-3.5 rounded-xl bg-brand-neon text-brand-dark font-extrabold text-xs uppercase tracking-wider hover:bg-emerald-400 transition shadow-lg shadow-brand-neon/20 flex items-center">
-                        <i class="fa-solid fa-calculator mr-2"></i>Zum Jump Rechner
+                <div class="flex flex-wrap gap-4">
+                    <a href="#jump-calculator" class="px-6 py-3.5 bg-cyber-neon text-black font-extrabold rounded-xl hover:bg-cyber-neon/90 transition flex items-center gap-2 shadow-lg shadow-cyber-neon/20">
+                        <i data-lucide="calculator" class="w-5 h-5"></i> Zum Jump Rechner
                     </a>
-                    <a href="#bikepark-explorer" class="px-6 py-3.5 rounded-xl bg-brand-card text-white border border-brand-border font-extrabold text-xs uppercase tracking-wider hover:border-brand-cyan transition flex items-center">
-                        <i class="fa-solid fa-map-location-dot mr-2 text-brand-cyan"></i>Alle Bikeparks (12+)
+                    <a href="#spots" class="px-6 py-3.5 bg-cyber-card border border-cyber-border text-white font-bold rounded-xl hover:bg-cyber-border/50 transition flex items-center gap-2">
+                        <i data-lucide="map" class="w-5 h-5"></i> Spots Erkunden
                     </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 1. JUMP PHYSICS & LANDING BUILD CALCULATOR -->
-        <section id="jump-calculator" class="space-y-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <!-- JUMP PHYSICS CALCULATOR -->
+    <section id="jump-calculator" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-8">
                 <div>
-                    <span class="text-xs uppercase font-mono tracking-widest text-brand-neon">Physics &amp; Trajectory Lab</span>
-                    <h2 class="font-heading text-3xl sm:text-4xl text-white uppercase tracking-wide">Jump &amp; Landing Shaper Rechner</h2>
+                    <span class="text-xs font-bold text-cyber-neon uppercase tracking-widest">Physics & Trajectory Lab</span>
+                    <h2 class="text-3xl font-black text-white">JUMP & LANDING SHAPER RECHNER</h2>
                 </div>
-                <p class="text-xs text-slate-400 max-w-md">Berechne Flugbahn, Airtime und exakte Bauvorgaben (Landungs-Startpunkt, Höhe &amp; Neigung) für deinen Kicker.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Controls Card -->
-                <div class="glass-card p-6 rounded-3xl space-y-6 border border-brand-border">
-                    <h3 class="font-heading text-lg uppercase tracking-wide text-white border-b border-brand-border pb-3 flex items-center">
-                        <i class="fa-solid fa-sliders text-brand-neon mr-2"></i>Parameter Eingabe
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-5 glass-panel p-6 rounded-2xl border border-cyber-border">
+                    <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                        <i data-lucide="sliders" class="text-cyber-neon w-5 h-5"></i> Parameter Eingabe
                     </h3>
-                    
-                    <div class="space-y-4 text-xs">
+                    <div class="space-y-6">
                         <div>
-                            <div class="flex justify-between font-bold mb-1">
-                                <span class="text-slate-300">Anfahrts-Geschwindigkeit</span>
-                                <span id="val-speed" class="text-brand-neon font-mono text-sm">35 km/h</span>
+                            <div class="flex justify-between text-sm mb-2">
+                                <label class="text-gray-300 font-medium">Anfahrts-Geschwindigkeit</label>
+                                <span id="val-speed" class="font-bold text-cyber-neon">27 km/h</span>
                             </div>
-                            <input id="input-speed" type="range" min="15" max="65" value="35" step="1" oninput="calculateJump()" class="w-full accent-brand-neon cursor-pointer">
+                            <input type="range" id="input-speed" min="10" max="60" value="27" step="1" class="w-full h-2 bg-cyber-border rounded-lg appearance-none cursor-pointer accent-cyber-neon">
                         </div>
                         <div>
-                            <div class="flex justify-between font-bold mb-1">
-                                <span class="text-slate-300">Absprung-Winkel</span>
-                                <span id="val-angle" class="text-brand-cyan font-mono text-sm">45°</span>
+                            <div class="flex justify-between text-sm mb-2">
+                                <label class="text-gray-300 font-medium">Absprung-Winkel</label>
+                                <span id="val-angle" class="font-bold text-cyber-neon">41°</span>
                             </div>
-                            <input id="input-angle" type="range" min="20" max="75" value="45" step="1" oninput="calculateJump()" class="w-full accent-brand-cyan cursor-pointer">
+                            <input type="range" id="input-angle" min="15" max="65" value="41" step="1" class="w-full h-2 bg-cyber-border rounded-lg appearance-none cursor-pointer accent-cyber-neon">
                         </div>
                         <div>
-                            <div class="flex justify-between font-bold mb-1">
-                                <span class="text-slate-300">Absprung-Höhe (Kicker)</span>
-                                <span id="val-height" class="text-blue-400 font-mono text-sm">1.8 m</span>
+                            <div class="flex justify-between text-sm mb-2">
+                                <label class="text-gray-300 font-medium">Absprung-Höhe (Kicker)</label>
+                                <span id="val-height" class="font-bold text-cyber-blue">1.8 m</span>
                             </div>
-                            <input id="input-height" type="range" min="0.5" max="5.0" value="1.8" step="0.1" oninput="calculateJump()" class="w-full accent-blue-400 cursor-pointer">
+                            <input type="range" id="input-height" min="0.5" max="3.5" value="1.8" step="0.1" class="w-full h-2 bg-cyber-border rounded-lg appearance-none cursor-pointer accent-cyber-blue">
                         </div>
                         <div>
-                            <div class="flex justify-between font-bold mb-1">
-                                <span class="text-slate-300">Geplante Gap-Distanz</span>
-                                <span id="val-gap" class="text-purple-400 font-mono text-sm">6.0 m</span>
+                            <div class="flex justify-between text-sm mb-2">
+                                <label class="text-gray-300 font-medium">Geplante Gap-Distanz</label>
+                                <span id="val-gap" class="font-bold text-cyber-accent">6.0 m</span>
                             </div>
-                            <input id="input-gap" type="range" min="2.0" max="25.0" value="6.0" step="0.5" oninput="calculateJump()" class="w-full accent-purple-400 cursor-pointer">
+                            <input type="range" id="input-gap" min="1.5" max="15" value="6.0" step="0.5" class="w-full h-2 bg-cyber-border rounded-lg appearance-none cursor-pointer accent-cyber-accent">
                         </div>
                     </div>
                 </div>
 
-                <!-- Visualizer & Output Cards -->
-                <div class="lg:col-span-2 space-y-6">
-                    <!-- SVG Visualizer -->
-                    <div class="glass-card p-6 rounded-3xl border border-brand-border relative overflow-hidden">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs uppercase font-mono tracking-wider text-slate-300"><i class="fa-solid fa-chart-line mr-2 text-brand-neon"></i>Live Flugparabel &amp; Landing Profile</span>
-                            <span id="jump-status-badge" class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-neon/10 text-brand-neon border border-brand-neon/30">Overshoot Safe</span>
+                <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+                    <div class="glass-panel p-6 rounded-2xl border border-cyber-border relative overflow-hidden">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
+                                <i data-lucide="activity" class="w-4 h-4 text-cyber-neon"></i> Flugparabel & Landing Profile
+                            </span>
+                            <span id="status-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-green-500/10 text-green-400 border border-green-500/30">SWEETSPOT</span>
                         </div>
-                        <div class="bg-brand-black/60 rounded-2xl p-4 border border-brand-border/60 h-64 relative flex items-center justify-center overflow-hidden">
-                            <svg id="jump-svg" class="w-full h-full" viewBox="0 0 700 220" preserveAspectRatio="none">
-                                <!-- Grid lines -->
-                                <line x1="0" y1="170" x2="700" y2="170" stroke="#1e293b" stroke-dasharray="4" stroke-width="1"/>
-                                <line x1="120" y1="0" x2="120" y2="220" stroke="#1e293b" stroke-dasharray="4" stroke-width="1"/>
-                                <!-- Dynamic Kicker Ramp -->
-                                <polygon id="svg-kicker" points="80,170 120,170 120,130" fill="#3b82f6" opacity="0.8"/>
-                                <!-- Dynamic Trajectory Curve Path -->
-                                <path id="svg-trajectory" d="M120,130 Q 300,10 500,170" fill="none" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
-                                <!-- Dynamic Landing Hill -->
-                                <polygon id="svg-landing" points="450,170 550,170 500,110" fill="#00e5ff" opacity="0.7"/>
+                        <div class="w-full h-56 bg-cyber-bg/80 rounded-xl p-4 border border-cyber-border/40 relative">
+                            <svg id="svg-canvas" class="w-full h-full overflow-visible" viewBox="0 0 600 200">
+                                <line x1="20" y1="170" x2="580" y2="170" stroke="#1e293b" stroke-width="2" stroke-dasharray="4 4" />
+                                <path id="svg-kicker" d="M 20 170 Q 50 170 70 120 L 70 170 Z" fill="#00b8ff" fill-opacity="0.2" stroke="#00b8ff" stroke-width="2" />
+                                <path id="svg-trajectory" d="M 70 120 Q 250 10 450 170" fill="none" stroke="#00ffcc" stroke-width="3" stroke-linecap="round" />
+                                <polygon id="svg-landing" points="380,170 420,110 480,170" fill="#00ffcc" fill-opacity="0.3" stroke="#00ffcc" stroke-width="2" />
                             </svg>
                         </div>
                     </div>
 
-                    <!-- Metrics Grid -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <div class="glass-card p-4 rounded-2xl border border-brand-border">
-                            <span class="block text-[10px] font-mono text-slate-400 uppercase">Flugweite</span>
-                            <span id="out-distance" class="text-xl font-extrabold text-white font-mono">6.4 m</span>
-                            <span class="block text-[10px] text-brand-neon mt-1">Weite bis Landung</span>
+                        <div class="glass-panel p-4 rounded-xl border border-cyber-border">
+                            <span class="text-xs text-gray-400 uppercase font-semibold">Flugweite</span>
+                            <p id="out-distance" class="text-2xl font-black text-white mt-1">7.3 m</p>
                         </div>
-                        <div class="glass-card p-4 rounded-2xl border border-brand-border">
-                            <span class="block text-[10px] font-mono text-slate-400 uppercase">Max. Flughöhe</span>
-                            <span id="out-max-height" class="text-xl font-extrabold text-brand-cyan font-mono">3.2 m</span>
-                            <span class="block text-[10px] text-slate-400 mt-1">Scheitelpunkt</span>
+                        <div class="glass-panel p-4 rounded-xl border border-cyber-border">
+                            <span class="text-xs text-gray-400 uppercase font-semibold">Max. Flughöhe</span>
+                            <p id="out-apex" class="text-2xl font-black text-white mt-1">3.0 m</p>
                         </div>
-                        <div class="glass-card p-4 rounded-2xl border border-brand-border">
-                            <span class="block text-[10px] font-mono text-slate-400 uppercase">Flugzeit (Airtime)</span>
-                            <span id="out-airtime" class="text-xl font-extrabold text-blue-400 font-mono">0.82 s</span>
-                            <span class="block text-[10px] text-slate-400 mt-1">Sekunden in der Luft</span>
+                        <div class="glass-panel p-4 rounded-xl border border-cyber-border">
+                            <span class="text-xs text-gray-400 uppercase font-semibold">Flugzeit (Airtime)</span>
+                            <p id="out-airtime" class="text-2xl font-black text-white mt-1">1.29 s</p>
                         </div>
-                        <div class="glass-card p-4 rounded-2xl border border-brand-border">
-                            <span class="block text-[10px] font-mono text-slate-400 uppercase">Empf. Landewinkel</span>
-                            <span id="out-land-angle" class="text-xl font-extrabold text-purple-400 font-mono">38°</span>
-                            <span class="block text-[10px] text-slate-400 mt-1">Neigung der Landung</span>
-                        </div>
-                    </div>
-
-                    <!-- Shaper Guide Spec -->
-                    <div class="glass-card p-6 rounded-3xl border border-brand-border space-y-4">
-                        <div class="flex items-center justify-between">
-                            <h4 class="font-heading text-lg uppercase tracking-wide text-white flex items-center">
-                                <i class="fa-solid fa-shield-halved text-brand-neon mr-2"></i>Landungs-Bau Vorgaben (Shaper Guide)
-                            </h4>
-                            <span class="text-[10px] font-mono uppercase bg-brand-neon/10 text-brand-neon px-2.5 py-1 rounded-full border border-brand-neon/30">Trailbuilding Spec</span>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs">
-                            <div class="bg-brand-dark/80 p-3 rounded-xl border border-brand-border">
-                                <span class="block text-slate-400 font-mono uppercase text-[10px]">Landung Start</span>
-                                <span id="build-start-dist" class="text-sm font-extrabold text-white font-mono">5.2 m</span>
-                                <span class="block text-[10px] text-brand-cyan mt-0.5">Ab Kicker-Kante</span>
-                            </div>
-                            <div class="bg-brand-dark/80 p-3 rounded-xl border border-brand-border">
-                                <span class="block text-slate-400 font-mono uppercase text-[10px]">Erforderl. Höhe</span>
-                                <span id="build-height" class="text-sm font-extrabold text-brand-neon font-mono">1.8 m</span>
-                                <span class="block text-[10px] text-slate-400 mt-0.5">Landehügel Höhe</span>
-                            </div>
-                            <div class="bg-brand-dark/80 p-3 rounded-xl border border-brand-border">
-                                <span class="block text-slate-400 font-mono uppercase text-[10px]">Mindest-Länge</span>
-                                <span id="build-length" class="text-sm font-extrabold text-blue-400 font-mono">4.5 m</span>
-                                <span class="block text-[10px] text-slate-400 mt-0.5">Ausroll-Hügel Zone</span>
-                            </div>
-                            <div class="bg-brand-dark/80 p-3 rounded-xl border border-brand-border">
-                                <span class="block text-slate-400 font-mono uppercase text-[10px]">Sweetspot Neigung</span>
-                                <span id="build-slope" class="text-sm font-extrabold text-purple-400 font-mono">35° - 40°</span>
-                                <span class="block text-[10px] text-slate-400 mt-0.5">Gegen Sanfte Landung</span>
-                            </div>
+                        <div class="glass-panel p-4 rounded-xl border border-cyber-border">
+                            <span class="text-xs text-gray-400 uppercase font-semibold">Empf. Landewinkel</span>
+                            <p id="out-landing-angle" class="text-2xl font-black text-white mt-1">54°</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 2. SPOTS & BIKEPARKS EXPLORER (12+ Spots) -->
-        <section id="bikepark-explorer" class="space-y-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div>
-                    <span class="text-xs uppercase font-mono tracking-widest text-brand-cyan">Spot Explorer &amp; Visuals</span>
-                    <h2 class="font-heading text-3xl sm:text-4xl text-white uppercase tracking-wide">Bikepark &amp; Trail Datenbank (12+ Spots)</h2>
-                </div>
-                <p class="text-xs text-slate-400 max-w-md">Entdecke Top-Bikeparks und Spots in Österreich &amp; im DACH-Raum mit Feature Breakdowns.</p>
+    <!-- BIKEPARK DATABASE -->
+    <section id="spots" class="py-16 bg-cyber-bg/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <span class="text-xs font-bold text-cyber-neon uppercase tracking-widest">Regional & Verified Trail Data</span>
+                <h2 class="text-3xl font-black text-white">BIKEPARK & SPOT DATABASE</h2>
             </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="spots-container"></div>
+        </div>
+    </section>
 
-            <!-- Grid of 12 Spots -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Spot 1 -->
-                <div class="glass-card p-6 rounded-3xl border border-brand-border space-y-4 flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30">Bikepark</span>
-                            <span class="text-xs text-slate-400 font-mono">Windischgarsten, OÖ</span>
-                        </div>
-                        <h3 class="font-heading text-xl uppercase tracking-wide text-white">Bikepark Wurbauerkogel</h3>
-                        <p class="text-xs text-slate-300">Blue Lord Flowline, Pro Line Kicker &amp; Pumptrack an der Talstation.</p>
-                    </div>
-                    <div class="pt-4 border-t border-brand-border flex items-center justify-between text-xs">
-                        <span class="text-emerald-400 font-mono"><i class="fa-solid fa-check mr-1"></i>TrailLab Tested</span>
-                        <button onclick="openSpotModal('wurbauerkogel')" class="text-brand-cyan font-bold hover:underline">Line Breakdown &gt;</button>
-                    </div>
-                </div>
-
-                <!-- Spot 2 -->
-                <div class="glass-card p-6 rounded-3xl border border-brand-border space-y-4 flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-neon/10 text-brand-neon border border-brand-neon/30">Bikepark</span>
-                            <span class="text-xs text-slate-400 font-mono">Steiermark, AT</span>
-                        </div>
-                        <h3 class="font-heading text-xl uppercase tracking-wide text-white">Bikepark Schladming Planai</h3>
-                        <p class="text-xs text-slate-300">World-Cup Downhill Strecken, 9km Stadium Flowline &amp; riesige Tabletop-Jumps.</p>
-                    </div>
-                    <div class="pt-4 border-t border-brand-border flex items-center justify-between text-xs">
-                        <span class="text-emerald-400 font-mono"><i class="fa-solid fa-check mr-1"></i>TrailLab Tested</span>
-                        <button onclick="openSpotModal('schladming')" class="text-brand-cyan font-bold hover:underline">Line Breakdown &gt;</button>
-                    </div>
-                </div>
-
-                <!-- Spot 3 -->
-                <div class="glass-card p-6 rounded-3xl border border-brand-border space-y-4 flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-purple-400/10 text-purple-400 border border-purple-400/30">Freeride &amp; Dirt</span>
-                            <span class="text-xs text-slate-400 font-mono">Wels-Land, OÖ</span>
-                        </div>
-                        <h3 class="font-heading text-xl uppercase tracking-wide text-white">Sattledt Freeride Park</h3>
-                        <p class="text-xs text-slate-300">Erd-Jumplines, Step-Downs &amp; Slopestyle Dirt-Tables (kein Holz).</p>
-                    </div>
-                    <div class="pt-4 border-t border-brand-border flex items-center justify-between text-xs">
-                        <span class="text-emerald-400 font-mono"><i class="fa-solid fa-check mr-1"></i>TrailLab Tested</span>
-                        <button onclick="openSpotModal('sattledt')" class="text-brand-cyan font-bold hover:underline">Line Breakdown &gt;</button>
-                    </div>
-                </div>
-
-                <!-- Spot 4 -->
-                <div class="glass-card p-6 rounded-3xl border border-brand-border space-y-4 flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30">Bikepark</span>
-                            <span class="text-xs text-slate-400 font-mono">Saalbach, Sbg</span>
-                        </div>
-                        <h3 class="font-heading text-xl uppercase tracking-wide text-white">Bikepark Saalbach Hinterglemm</h3>
-                        <p class="text-xs text-slate-300">Pro Line, X-Line &amp; Hacklberg Trail. Epische Airtime &amp; endloser Downhill-Spaß.</p>
-                    </div>
-                    <div class="pt-4 border-t border-brand-border flex items-center justify-between text-xs">
-                        <span class="text-emerald-400 font-mono"><i class="fa-solid fa-check mr-1"></i>TrailLab Tested</span>
-                        <button onclick="openSpotModal('saalbach')" class="text-brand-cyan font-bold hover:underline">Line Breakdown &gt;</button>
-                    </div>
-                </div>
-
-                <!-- Spot 5 -->
-                <div class="glass-card p-6 rounded-3xl border border-brand-border space-y-4 flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30">Bikepark</span>
-                            <span class="text-xs text-slate-400 font-mono">Leogang, Sbg</span>
-                        </div>
-                        <h3 class="font-heading text-xl uppercase tracking-wide text-white">Epic Bikepark Leogang</h3>
-                        <p class="text-xs text-slate-300">Speedster Downhill, Flying Gangster Freeride &amp; GoPro Jumpline.</p>
-                    </div>
-                    <div class="pt-4 border-t border-brand-border flex items-center justify-between text-xs">
-                        <span class="text-emerald-400 font-mono"><i class="fa-solid fa-check mr-1"></i>TrailLab Tested</span>
-                        <button onclick="openSpotModal('leogang')" class="text-brand-cyan font-bold hover:underline">Line Breakdown &gt;</button>
-                    </div>
-                </div>
-
-                <!-- Spot 6 -->
-                <div class="glass-card p-6 rounded-3xl border border-brand-border space-y-4 flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30">Bikepark</span>
-                            <span class="text-xs text-slate-400 font-mono">Semmering, NÖ</span>
-                        </div>
-                        <h3 class="font-heading text-xl uppercase tracking-wide text-white">Bikepark Zauberberg Semmering</h3>
-                        <p class="text-xs text-slate-300">Sweet 16 Flowtrail, Family Area &amp; Freeride Jump-Battery.</p>
-                    </div>
-                    <div class="pt-4 border-t border-brand-border flex items-center justify-between text-xs">
-                        <span class="text-emerald-400 font-mono"><i class="fa-solid fa-check mr-1"></i>TrailLab Tested</span>
-                        <button onclick="openSpotModal('semmering')" class="text-brand-cyan font-bold hover:underline">Line Breakdown &gt;</button>
-                    </div>
-                </div>
-
-                <!-- Spot 7 -->
-                <div class="glass-card p-6 rounded-3xl border border-brand-border space-y-4 flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30">Bikepark</span>
-                            <span class="text-xs text-slate-400 font-mono">St. Corona, NÖ</span>
-                        </div>
-                        <h3 class="font-heading text-xl uppercase tracking-wide text-white">Wexl Trails</h3>
-                        <p class="text-xs text-slate-300">Legendäre Flowtrails, Singletrails &amp; eine riesige Jumpline Area.</p>
-                    </div>
-                    <div class="pt-4 border-t border-brand-border flex items-center justify-between text-xs">
-                        <span class="text-emerald-400 font-mono"><i class="fa-solid fa-check mr-1"></i>TrailLab Tested</span>
-                        <button onclick="openSpotModal('wexl')" class="text-brand-cyan font-bold hover:underline">Line Breakdown &gt;</button>
-                    </div>
-                </div>
-
-                <!-- Spot 8 -->
-                <div class="glass-card p-6 rounded-3xl border border-brand-border space-y-4 flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30">Bikepark</span>
-                            <span class="text-xs text-slate-400 font-mono">Innsbruck, Tirol</span>
-                        </div>
-                        <h3 class="font-heading text-xl uppercase tracking-wide text-white">Bikepark Innsbruck (Muttereralm)</h3>
-                        <p class="text-xs text-slate-300">The Chainless One, Nazzen Trail &amp; flowige Kurven direkt über Innsbruck.</p>
-                    </div>
-                    <div class="pt-4 border-t border-brand-border flex items-center justify-between text-xs">
-                        <span class="text-emerald-400 font-mono"><i class="fa-solid fa-check mr-1"></i>TrailLab Tested</span>
-                        <button onclick="openSpotModal('innsbruck')" class="text-brand-cyan font-bold hover:underline">Line Breakdown &gt;</button>
-                    </div>
-                </div>
-
-                <!-- Spot 9 -->
-                <div class="glass-card p-6 rounded-3xl border border-brand-border space-y-4 flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30">Bikepark</span>
-                            <span class="text-xs text-slate-400 font-mono">Brandnertal, Vbg</span>
-                        </div>
-                        <h3 class="font-heading text-xl uppercase tracking-wide text-white">Bikepark Brandnertal</h3>
-                        <p class="text-xs text-slate-300">Tschackacka Line, Northshore Elemente &amp; anspruchsvolle Downhills.</p>
-                    </div>
-                    <div class="pt-4 border-t border-brand-border flex items-center justify-between text-xs">
-                        <span class="text-emerald-400 font-mono"><i class="fa-solid fa-check mr-1"></i>TrailLab Tested</span>
-                        <button onclick="openSpotModal('brandnertal')" class="text-brand-cyan font-bold hover:underline">Line Breakdown &gt;</button>
-                    </div>
-                </div>
+    <!-- BIKE FINDER -->
+    <section id="bike-finder" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <span class="text-xs font-bold text-cyber-blue uppercase tracking-widest">Smart Matcher</span>
+                <h2 class="text-3xl font-black text-white">BIKE FINDER & CONFIGURATOR</h2>
             </div>
-
-            <!-- COMMUNITY VOTE -->
-            <div class="glass-card p-8 rounded-3xl border border-brand-border space-y-6">
-                <div class="flex items-center justify-between">
+            <div class="glass-panel p-8 rounded-2xl border border-cyber-border">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div>
-                        <span class="text-xs uppercase font-mono tracking-widest text-brand-neon">Community Vote (1 Stimme pro Rider)</span>
-                        <h3 class="font-heading text-2xl text-white uppercase tracking-wide">Spot des Monats Abstimmung</h3>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Disziplin</label>
+                        <select id="bike-type" class="w-full bg-cyber-bg border border-cyber-border rounded-xl p-3 text-white focus:border-cyber-neon outline-none">
+                            <option value="all">Alle Disziplinen</option>
+                            <option value="downhill">Downhill / Freeride</option>
+                            <option value="enduro">Enduro / Bikepark</option>
+                            <option value="trail">Trail / All-Mountain</option>
+                        </select>
                     </div>
-                    <span class="text-xs text-slate-400"><i class="fa-solid fa-users mr-1.5 text-brand-neon"></i>316 Votes total</span>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Maximales Budget (€)</label>
+                        <input type="number" id="bike-budget" value="5000" class="w-full bg-cyber-bg border border-cyber-border rounded-xl p-3 text-white focus:border-cyber-neon outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Körpergröße (cm)</label>
+                        <input type="number" id="bike-height" value="178" class="w-full bg-cyber-bg border border-cyber-border rounded-xl p-3 text-white focus:border-cyber-neon outline-none">
+                    </div>
                 </div>
-                <p class="text-xs text-slate-300">Welchen Spot sollen wir als Nächstes im Lab genauer analysieren?</p>
+                <div id="bike-results" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            </div>
+        </div>
+    </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="vote-options-container">
-                    <!-- Option 1 -->
-                    <div class="bg-brand-dark p-5 rounded-2xl border border-brand-border space-y-3 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-white text-sm">Schladming Planai</span>
-                                <span id="vote-pct-1" class="font-mono text-brand-neon font-bold text-xs">45%</span>
-                            </div>
-                            <div class="w-full bg-brand-border rounded-full h-2 overflow-hidden">
-                                <div id="vote-bar-1" class="bg-brand-neon h-full rounded-full transition-all duration-500" style="width: 45%;"></div>
-                            </div>
-                            <p class="text-[11px] text-slate-400 mt-2">Monster Jump Line Focus &amp; Downhill Speed.</p>
+    <!-- SUSPENSION LAB -->
+    <section id="suspension" class="py-16 bg-cyber-bg/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <span class="text-xs font-bold text-cyber-accent uppercase tracking-widest">Base Setup Shaper</span>
+                <h2 class="text-3xl font-black text-white">SUSPENSION & REBOUND LAB</h2>
+            </div>
+            <div class="glass-panel p-8 rounded-2xl border border-cyber-border grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between text-sm mb-2">
+                            <label class="text-gray-300 font-medium">Fahrergewicht (inkl. Ausrüstung)</label>
+                            <span id="val-weight" class="font-bold text-cyber-neon">75 kg</span>
                         </div>
-                        <button id="vote-btn-1" onclick="castVote(1)" class="w-full py-2.5 rounded-xl bg-brand-neon text-brand-dark font-extrabold text-xs uppercase tracking-wider hover:bg-emerald-400 transition shadow-md shadow-brand-neon/10">
-                            Für diesen Spot Abstimmen
-                        </button>
+                        <input type="range" id="input-weight" min="45" max="120" value="75" class="w-full h-2 bg-cyber-border rounded-lg appearance-none cursor-pointer accent-cyber-neon">
                     </div>
-
-                    <!-- Option 2 -->
-                    <div class="bg-brand-dark p-5 rounded-2xl border border-brand-border space-y-3 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-white text-sm">Wurbauerkogel</span>
-                                <span id="vote-pct-2" class="font-mono text-brand-cyan font-bold text-xs">31%</span>
-                            </div>
-                            <div class="w-full bg-brand-border rounded-full h-2 overflow-hidden">
-                                <div id="vote-bar-2" class="bg-brand-cyan h-full rounded-full transition-all duration-500" style="width: 31%;"></div>
-                            </div>
-                            <p class="text-[11px] text-slate-400 mt-2">Flowline vs. Downhill Line Analysis.</p>
+                    <div>
+                        <div class="flex justify-between text-sm mb-2">
+                            <label class="text-gray-300 font-medium">Federweg Vorne (Gabel)</label>
+                            <span id="val-travel" class="font-bold text-cyber-blue">170 mm</span>
                         </div>
-                        <button id="vote-btn-2" onclick="castVote(2)" class="w-full py-2.5 rounded-xl bg-brand-cyan text-brand-dark font-extrabold text-xs uppercase tracking-wider hover:bg-cyan-300 transition shadow-md shadow-brand-cyan/10">
-                            Für diesen Spot Abstimmen
-                        </button>
+                        <input type="range" id="input-travel" min="120" max="200" value="170" step="10" class="w-full h-2 bg-cyber-border rounded-lg appearance-none cursor-pointer accent-cyber-blue">
                     </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Dämpfer Typ</label>
+                        <select id="shock-type" class="w-full bg-cyber-bg border border-cyber-border rounded-xl p-3 text-white focus:border-cyber-neon outline-none">
+                            <option value="air">Luftdämpfer (Air Shock)</option>
+                            <option value="coil">Stahlfeder (Coil Shock)</option>
+                        </select>
+                    </div>
+                </div>
 
-                    <!-- Option 3 -->
-                    <div class="bg-brand-dark p-5 rounded-2xl border border-brand-border space-y-3 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-white text-sm">Sattledt Dirtpark</span>
-                                <span id="vote-pct-3" class="font-mono text-blue-400 font-bold text-xs">24%</span>
-                            </div>
-                            <div class="w-full bg-brand-border rounded-full h-2 overflow-hidden">
-                                <div id="vote-bar-3" class="bg-blue-400 h-full rounded-full transition-all duration-500" style="width: 24%;"></div>
-                            </div>
-                            <p class="text-[11px] text-slate-400 mt-2">Erd-Tables &amp; Slopestyle Shaping.</p>
-                        </div>
-                        <button id="vote-btn-3" onclick="castVote(3)" class="w-full py-2.5 rounded-xl bg-blue-500 text-white font-extrabold text-xs uppercase tracking-wider hover:bg-blue-400 transition shadow-md shadow-blue-500/10">
-                            Für diesen Spot Abstimmen
-                        </button>
+                <div class="glass-panel p-6 rounded-xl border border-cyber-border flex flex-col justify-center space-y-4">
+                    <h3 class="text-lg font-bold text-white mb-2">Empfohlenes Basis-Setup:</h3>
+                    <div class="flex justify-between items-center py-2 border-b border-cyber-border">
+                        <span class="text-gray-400">Federgabel Luftdruck:</span>
+                        <span id="out-fork-psi" class="text-xl font-bold text-cyber-neon">75 PSI</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 border-b border-cyber-border">
+                        <span class="text-gray-400">Dämpfer Setup:</span>
+                        <span id="out-shock-val" class="text-xl font-bold text-cyber-blue">165 PSI</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2">
+                        <span class="text-gray-400">Rebound (Zugstufe):</span>
+                        <span id="out-rebound" class="text-xl font-bold text-cyber-accent">-6 Klicks</span>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 3. BIKE FINDER & SETUP RECHNER -->
-        <section id="bike-finder" class="space-y-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div>
-                    <span class="text-xs uppercase font-mono tracking-widest text-brand-blue">Geometry &amp; Sizing Matrix</span>
-                    <h2 class="font-heading text-3xl sm:text-4xl text-white uppercase tracking-wide">Bike Finder &amp; Setup Rechner</h2>
-                </div>
-                <p class="text-xs text-slate-400 max-w-md">Ermittle deine ideale Rahmengröße, Reach-Werte und passenden Bike-Empfehlungen in Echtzeit.</p>
+    <!-- PRO MEMBER / ERSTELLER UNTERSTÜTZEN -->
+    <section id="pro-member" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="px-3 py-1 bg-cyber-accent/10 border border-cyber-accent/30 text-cyber-accent text-xs font-bold rounded-full uppercase tracking-widest inline-block mb-3">
+                    <i data-lucide="heart" class="w-3.5 h-3.5 inline mr-1"></i> Creator Support
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-white">UNTERSTÜTZE DEN ERSTELLER & SEI TEIL VON TRAILLAB</h2>
+                <p class="text-gray-400 mt-4 text-base">
+                    TrailLab ist ein leidenschaftliches Community-Projekt. Mit deiner Unterstützung hilfst du dabei, die Serverkosten zu decken und neue Rechner-Features zu entwickeln!
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- User Inputs -->
-                <div class="glass-card p-6 rounded-3xl space-y-6 border border-brand-border">
-                    <h3 class="font-heading text-lg uppercase tracking-wide text-white border-b border-brand-border pb-3 flex items-center">
-                        <i class="fa-solid fa-user-gear text-brand-blue mr-2"></i>Deine Körpermaße
-                    </h3>
-
-                    <div class="space-y-4 text-xs">
-                        <div>
-                            <div class="flex justify-between font-bold mb-1">
-                                <span class="text-slate-300">Körpergröße</span>
-                                <span id="finder-height-val" class="text-brand-neon font-mono text-sm">180 cm</span>
-                            </div>
-                            <input id="finder-height" type="range" min="150" max="210" value="180" step="1" oninput="updateBikeFinder()" class="w-full accent-brand-neon cursor-pointer">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-panel p-8 rounded-2xl border border-cyber-border flex flex-col justify-between hover:border-cyber-neon/50 transition">
+                    <div>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Supporter</span>
+                        <div class="flex items-baseline gap-1 my-4">
+                            <span class="text-4xl font-black text-white">2,99 €</span>
+                            <span class="text-gray-400 text-sm">/ Mon.</span>
                         </div>
-                        <div>
-                            <div class="flex justify-between font-bold mb-1">
-                                <span class="text-slate-300">Schrittlänge (Inseam)</span>
-                                <span id="finder-inseam-val" class="text-brand-cyan font-mono text-sm">85 cm</span>
-                            </div>
-                            <input id="finder-inseam" type="range" min="70" max="105" value="85" step="1" oninput="updateBikeFinder()" class="w-full accent-brand-cyan cursor-pointer">
-                        </div>
-                        <div>
-                            <label class="block text-slate-300 font-bold mb-1">Fahrdisziplin &amp; Einsatz</label>
-                            <select id="finder-discipline" onchange="updateBikeFinder()" class="w-full bg-brand-dark border border-brand-border rounded-xl px-3 py-2.5 text-white font-medium focus:outline-none focus:border-brand-blue">
-                                <option value="dh">Downhill / Big Mountain</option>
-                                <option value="freeride" selected="">Freeride &amp; Bikepark</option>
-                                <option value="enduro">Enduro &amp; All-Mountain</option>
-                                <option value="trail">Trail &amp; Flow</option>
-                                <option value="dirt">Dirt Jump &amp; Slopestyle</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-slate-300 font-bold mb-1">Budget-Kategorie</label>
-                            <select id="finder-budget" onchange="updateBikeFinder()" class="w-full bg-brand-dark border border-brand-border rounded-xl px-3 py-2.5 text-white font-medium focus:outline-none focus:border-brand-blue">
-                                <option value="budget">Value &lt; 3.000 €</option>
-                                <option value="mid" selected="">Performance 3.000 € – 5.500 €</option>
-                                <option value="high">Pro High-End &gt; 5.500 €</option>
-                            </select>
-                        </div>
+                        <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyber-neon"></i> Unterstütze die Web-Server</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyber-neon"></i> Werbefrei surfen</li>
+                        </ul>
                     </div>
+                    <a href="https://stripe.com" target="_blank" class="w-full py-3 bg-cyber-border hover:bg-cyber-neon hover:text-black font-bold text-center rounded-xl transition text-white">
+                        Ersteller Unterstützen
+                    </a>
                 </div>
 
-                <!-- Recommendation Output -->
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div class="glass-card p-5 rounded-2xl border border-brand-border">
-                            <span class="block text-[10px] font-mono text-slate-400 uppercase">Empfohlene Rahmengröße</span>
-                            <span id="out-frame-size" class="text-2xl font-extrabold text-white font-heading tracking-wide">L (Large)</span>
-                            <span class="block text-[10px] text-brand-neon mt-1">Stack / Reach optimiert</span>
+                <div class="glass-panel p-8 rounded-2xl border-2 border-cyber-neon relative flex flex-col justify-between shadow-xl shadow-cyber-neon/10">
+                    <span class="absolute -top-3 right-6 px-3 py-1 bg-cyber-neon text-black font-black text-xs uppercase rounded-full">Beliebt</span>
+                    <div>
+                        <span class="text-xs font-bold text-cyber-neon uppercase tracking-widest">Pro Rider</span>
+                        <div class="flex items-baseline gap-1 my-4">
+                            <span class="text-4xl font-black text-white">6,99 €</span>
+                            <span class="text-gray-400 text-sm">/ Mon.</span>
                         </div>
-                        <div class="glass-card p-5 rounded-2xl border border-brand-border">
-                            <span class="block text-[10px] font-mono text-slate-400 uppercase">Empfohlener Reach</span>
-                            <span id="out-reach" class="text-2xl font-extrabold text-brand-cyan font-mono">475 mm</span>
-                            <span class="block text-[10px] text-slate-400 mt-1">Cockpit-Länge</span>
-                        </div>
-                        <div class="glass-card p-5 rounded-2xl border border-brand-border">
-                            <span class="block text-[10px] font-mono text-slate-400 uppercase">Laufrad-Setup</span>
-                            <span id="out-wheelset" class="text-2xl font-extrabold text-blue-400 font-heading">Mullet (29&quot;/27.5&quot;)</span>
-                            <span class="block text-[10px] text-slate-400 mt-1">Agil &amp; Schnell</span>
-                        </div>
+                        <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyber-neon"></i> Ersteller & Entwicklung unterstützen</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyber-neon"></i> Serverkosten decken</li>
+                        </ul>
                     </div>
+                    <a href="https://stripe.com" target="_blank" class="w-full py-3 bg-cyber-neon text-black font-bold text-center rounded-xl transition hover:bg-cyber-neon/90 shadow-lg shadow-cyber-neon/20">
+                        Projekt Sponsor Werden
+                    </a>
+                </div>
 
-                    <!-- Top Bike Match Cards -->
-                    <div class="glass-card p-6 rounded-3xl border border-brand-border space-y-4">
-                        <h4 class="font-heading text-lg uppercase tracking-wide text-white flex items-center">
-                            <i class="fa-solid fa-bicycle text-brand-neon mr-2"></i>Top Bike-Empfehlungen für Dein Setup
-                        </h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="bike-recommendations-grid">
-                            <!-- Injected dynamically via JS -->
+                <div class="glass-panel p-8 rounded-2xl border border-cyber-border flex flex-col justify-between hover:border-cyber-accent/50 transition">
+                    <div>
+                        <span class="text-xs font-bold text-cyber-accent uppercase tracking-widest">Trail Builder VIP</span>
+                        <div class="flex items-baseline gap-1 my-4">
+                            <span class="text-4xl font-black text-white">14,99 €</span>
+                            <span class="text-gray-400 text-sm">/ Mon.</span>
                         </div>
+                        <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyber-accent"></i> Haupt-Sponsor der Plattform</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyber-accent"></i> Ermöglicht neue Features</li>
+                        </ul>
                     </div>
+                    <a href="https://stripe.com" target="_blank" class="w-full py-3 bg-cyber-border hover:bg-cyber-accent hover:text-white font-bold text-center rounded-xl transition text-white">
+                        VIP Sponsor Werden
+                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 4. SUSPENSION & REBOUND TUNING LAB -->
-        <section id="suspension-lab" class="space-y-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div>
-                    <span class="text-xs uppercase font-mono tracking-widest text-emerald-400">Suspension Dynamics</span>
-                    <h2 class="font-heading text-3xl sm:text-4xl text-white uppercase tracking-wide">Suspension &amp; Rebound Tuning Lab</h2>
-                </div>
-                <p class="text-xs text-slate-400 max-w-md">Berechne exakte Gabel-PSI, Dämpfer-Drücke und Rebound-Klicks für dein Körpergewicht.</p>
-            </div>
+    <!-- FOOTER -->
+    <footer class="border-t border-cyber-border bg-cyber-bg py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>© 2026 TrailLab & LineCheck. Gebaut mit Leidenschaft für Mountainbiker & Trailbuilder.</p>
+        </div>
+    </footer>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="glass-card p-6 rounded-3xl space-y-6 border border-brand-border">
-                    <h3 class="font-heading text-lg uppercase tracking-wide text-white border-b border-brand-border pb-3 flex items-center">
-                        <i class="fa-solid fa-gauge-high text-emerald-400 mr-2"></i>Fahrergewicht &amp; System
-                    </h3>
-                    <div class="space-y-4 text-xs">
-                        <div>
-                            <div class="flex justify-between font-bold mb-1">
-                                <span class="text-slate-300">Fahrergewicht (inkl. Ausrüstung)</span>
-                                <span id="susp-weight-val" class="text-emerald-400 font-mono text-sm">80 kg</span>
-                            </div>
-                            <input id="susp-weight" type="range" min="50" max="130" value="80" step="1" oninput="calculateSuspension()" class="w-full accent-emerald-400 cursor-pointer">
-                        </div>
-                        <div>
-                            <div class="flex justify-between font-bold mb-1">
-                                <span class="text-slate-300">Gabel Federweg</span>
-                                <span id="susp-travel-val" class="text-cyan-400 font-mono text-sm">170 mm</span>
-                            </div>
-                            <input id="susp-travel" type="range" min="130" max="200" value="170" step="10" oninput="calculateSuspension()" class="w-full accent-cyan-400 cursor-pointer">
-                        </div>
-                        <div>
-                            <label class="block text-slate-300 font-bold mb-1">Dämpfer-Art</label>
-                            <select id="susp-type" onchange="calculateSuspension()" class="w-full bg-brand-dark border border-brand-border rounded-xl px-3 py-2.5 text-white font-medium focus:outline-none focus:border-emerald-400">
-                                <option value="air" selected="">Luftdämpfer (Air Shock)</option>
-                                <option value="coil">Stahlfederdämpfer (Coil Shock)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div class="glass-card p-6 rounded-2xl border border-brand-border flex flex-col justify-between">
-                        <div>
-                            <span class="block text-[10px] font-mono text-slate-400 uppercase">Gabel Druck (PSI)</span>
-                            <span id="out-fork-psi" class="text-3xl font-extrabold text-emerald-400 font-mono mt-1 block">92 PSI</span>
-                            <p class="text-xs text-slate-300 mt-2">Empfohlener SAG: 20% – 22% mit 2 Token.</p>
-                        </div>
-                        <span class="text-[10px] font-mono text-slate-500 mt-4 pt-3 border-t border-brand-border">Empfehlung f. 80kg Rider</span>
-                    </div>
-
-                    <div class="glass-card p-6 rounded-2xl border border-brand-border flex flex-col justify-between">
-                        <div>
-                            <span class="block text-[10px] font-mono text-slate-400 uppercase">Dämpfer Setup</span>
-                            <span id="out-shock-spec" class="text-3xl font-extrabold text-brand-cyan font-mono mt-1 block">185 PSI</span>
-                            <p class="text-xs text-slate-300 mt-2">SAG: 30% im stehenden Attack-Modus.</p>
-                        </div>
-                        <span class="text-[10px] font-mono text-slate-500 mt-4 pt-3 border-t border-brand-border">Mid-Speed Compression: +3 Klicks</span>
-                    </div>
-
-                    <div class="glass-card p-6 rounded-2xl border border-brand-border flex flex-col justify-between">
-                        <div>
-                            <span class="block text-[10px] font-mono text-slate-400 uppercase">Rebound Zugstufe</span>
-                            <span id="out-rebound" class="text-3xl font-extrabold text-blue-400 font-mono mt-1 block">6 Klicks offen</span>
-                            <p class="text-xs text-slate-300 mt-2">Gezählt von geschlossener Position (voll im Uhrzeigersinn).</p>
-                        </div>
-                        <span class="text-[10px] font-mono text-slate-500 mt-4 pt-3 border-t border-brand-border">Schnelle Schläge absorbieren</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. PRO MEMBER SECTION -->
-        <section id="pro-membership" class="space-y-6">
-            <div class="glass-card p-8 sm:p-12 rounded-3xl border border-rose-500/30 bg-gradient-to-r from-brand-card via-brand-dark to-brand-card relative overflow-hidden">
-                <div class="absolute -right-20 -top-20 w-80 h-80 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="relative z-10 space-y-6 max-w-3xl">
-                    <div class="inline-flex items-center space-x-2 bg-rose-500/10 border border-rose-500/30 px-3 py-1 rounded-full text-rose-400 text-xs font-bold uppercase tracking-wider">
-                        <i class="fa-solid fa-crown"></i>
-                        <span>TrailLab PRO Membership</span>
-                    </div>
-                    <h2 class="font-heading text-3xl sm:text-5xl font-extrabold uppercase text-white tracking-wide">Werde TrailLab VIP &amp; Unterstütze das Projekt</h2>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Hol dir exklusiven Zugang zu unveröffentlichten Spot-Bauplänen, GPX-Downloads für Bikeparks, individueller Fahrwerks-Beratung &amp; exklusiven Rabatten bei MTB-Brands.
-                    </p>
-                    <div class="flex flex-wrap gap-4 pt-2">
-                        <a href="https://stripe.com" target="_blank" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-rose-500 to-amber-500 text-white font-extrabold text-xs uppercase tracking-wider hover:opacity-90 shadow-lg shadow-rose-500/20 flex items-center">
-                            <i class="fa-solid fa-bolt mr-2"></i>PRO Abonnieren (Stripe Link Verknüpfen)
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- SPOT DETAILS MODAL -->
-    <div id="spot-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
-        <div class="glass-card max-w-xl w-full p-6 sm:p-8 rounded-3xl border border-brand-border space-y-6 relative">
-            <button onclick="closeSpotModal()" class="absolute top-6 right-6 w-9 h-9 rounded-full bg-brand-dark border border-brand-border flex items-center justify-center text-slate-400 hover:text-white transition">
-                <i class="fa-solid fa-xmark"></i>
+    <!-- GOOGLE AUTH MODAL -->
+    <div id="auth-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel max-w-md w-full p-8 rounded-2xl border border-cyber-neon relative">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
             </button>
-
-            <div class="space-y-2">
-                <span id="modal-spot-tag" class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30">Bikepark</span>
-                <h3 id="modal-spot-title" class="font-heading text-2xl uppercase tracking-wide text-white">Bikepark Titel</h3>
-                <p id="modal-spot-location" class="text-xs font-mono text-slate-400">Standort</p>
-            </div>
-
-            <div class="space-y-4 text-xs text-slate-300">
-                <p id="modal-spot-desc">Detaillierte Beschreibung der Lines und Features...</p>
-                
-                <div class="grid grid-cols-2 gap-4 pt-2">
-                    <div class="bg-brand-dark p-3 rounded-xl border border-brand-border">
-                        <span class="block text-slate-400 text-[10px] font-mono">Streckenlänge</span>
-                        <span id="modal-spot-length" class="text-sm font-extrabold text-white font-mono">3.4 km</span>
-                    </div>
-                    <div class="bg-brand-dark p-3 rounded-xl border border-brand-border">
-                        <span class="block text-slate-400 text-[10px] font-mono">Höhenmeter</span>
-                        <span id="modal-spot-elevation" class="text-sm font-extrabold text-brand-neon font-mono">450 hm</span>
-                    </div>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-cyber-neon/10 border border-cyber-neon/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i data-lucide="user" class="w-6 h-6 text-cyber-neon"></i>
                 </div>
-
-                <div class="bg-brand-dark p-4 rounded-2xl border border-brand-border space-y-2">
-                    <span class="block font-bold text-white text-xs uppercase tracking-wider"><i class="fa-solid fa-wrench mr-2 text-brand-cyan"></i>Setup &amp; Reifendruck Empfehlung</span>
-                    <p id="modal-spot-setup" class="text-slate-300 text-xs">Reifendruck: 1.8 bar vorne / 2.0 bar hinten (Tubeless mit Insert).</p>
-                </div>
+                <h3 class="text-xl font-bold text-white">Mit Google Anmelden</h3>
+                <p class="text-xs text-gray-400 mt-1">Speichere deine Trail-Setups und Rechner-Daten</p>
             </div>
-
-            <button onclick="closeSpotModal()" class="w-full py-3 rounded-xl bg-brand-card text-white border border-brand-border font-bold text-xs uppercase tracking-wider hover:border-brand-cyan transition">
-                Schließen
+            <button onclick="simulateGoogleLogin()" class="w-full py-3 bg-white text-gray-900 font-bold rounded-xl hover:bg-gray-100 transition flex items-center justify-center gap-3">
+                <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                Weiter mit Google
             </button>
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-brand-border bg-brand-dark py-12 mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-            <div class="font-heading text-xl uppercase tracking-wider text-white">TrailLab &amp; LineCheck</div>
-            <p class="text-xs text-slate-400">Das professionelle Portal für Bikepark-Analytics, Jump-Engineering und MTB-Setups.</p>
-            <p class="text-[10px] text-slate-500 font-mono">&copy; 2026 TrailLab. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- JAVASCRIPT APP LOGIC -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- 1. JUMP PHYSICS CALCULATOR & LIVE SVG TRAJECTORY ---
-        function calculateJump() {
-            const v_kmh = parseFloat(document.getElementById('input-speed').value);
-            const angleDeg = parseFloat(document.getElementById('input-angle').value);
-            const h0 = parseFloat(document.getElementById('input-height').value);
-            const targetGap = parseFloat(document.getElementById('input-gap').value);
+        lucide.createIcons();
 
-            document.getElementById('val-speed').innerText = v_kmh + ' km/h';
-            document.getElementById('val-angle').innerText = angleDeg + '°';
-            document.getElementById('val-height').innerText = h0.toFixed(1) + ' m';
-            document.getElementById('val-gap').innerText = targetGap.toFixed(1) + ' m';
+        const spotsData = [
+            { id: 'sattledt', title: 'Bikepark Sattledt', region: 'Oberösterreich', type: 'Dirt & Clay Lines', surface: 'Lehm & Erde', features: ['Gap Jumps', 'Pumptrack'], votes: 142 },
+            { id: 'wurbauerkogel', title: 'Bikepark Wurbauerkogel', region: 'Windischgarsten, OÖ', type: 'Downhill & Freeride', surface: 'Erde, Wurzeln', features: ['Singletrail', 'Freeride'], votes: 289 },
+            { id: 'schladming', title: 'Bikepark Schladming', region: 'Steiermark', type: 'Pro Downhill', surface: 'Erde, Anlieger', features: ['99 Jump Line', 'World Cup DH'], votes: 512 },
+            { id: 'leogang', title: 'Bikepark Leogang', region: 'Salzburg', type: 'UCI Worldcup Park', surface: 'Berm, Drops', features: ['Speedster DH', 'Hot Shots'], votes: 430 },
+            { id: 'saalbach', title: 'Learn-To-Ride Park', region: 'Salzburg', type: 'Flow & Beginners', surface: 'Feiner Schotter', features: ['Monti Line', 'Blue Line'], votes: 195 },
+            { id: 'innsbruck', title: 'Bikepark Innsbruck', region: 'Tirol', type: 'Crankworx Tracks', surface: 'Alpine Trails', features: ['Crankworx DH', 'Chainless'], votes: 310 }
+        ];
 
-            const v = v_kmh / 3.6; // m/s
-            const rad = angleDeg * (Math.PI / 180);
+        const bikesData = [
+            { name: 'Canyon Sender CFR', category: 'downhill', price: 4699, size: 'L (175-188cm)' },
+            { name: 'Specialized Demo Expert', category: 'downhill', price: 4800, size: 'S4 (173-185cm)' },
+            { name: 'YT Capra Core 3', category: 'enduro', price: 3999, size: 'L (174-184cm)' },
+            { name: 'Commencal Clash Ride', category: 'enduro', price: 3700, size: 'M (168-180cm)' },
+            { name: 'Rose Root Miller 2', category: 'trail', price: 2599, size: 'M (172-182cm)' }
+        ];
+
+        function updateJumpPhysics() {
+            const speed = parseFloat(document.getElementById('input-speed').value);
+            const angle = parseFloat(document.getElementById('input-angle').value);
+            const height = parseFloat(document.getElementById('input-height').value);
+            const gap = parseFloat(document.getElementById('input-gap').value);
+
+            document.getElementById('val-speed').innerText = speed + ' km/h';
+            document.getElementById('val-angle').innerText = angle + '°';
+            document.getElementById('val-height').innerText = height.toFixed(1) + ' m';
+            document.getElementById('val-gap').innerText = gap.toFixed(1) + ' m';
+
+            const v0 = speed / 3.6;
+            const rad = angle * (Math.PI / 180);
             const g = 9.81;
 
-            const vx = v * Math.cos(rad);
-            const vy = v * Math.sin(rad);
+            const vx = v0 * Math.cos(rad);
+            const vy = v0 * Math.sin(rad);
 
-            const discriminant = vy * vy + 2 * g * h0;
-            const t = (vy + Math.sqrt(discriminant)) / g;
+            const airtime = (vy + Math.sqrt(vy * vy + 2 * g * height)) / g;
+            const distance = vx * airtime;
+            const apex = height + (vy * vy) / (2 * g);
+            const landingAngle = Math.round(Math.atan((g * airtime - vy) / vx) * (180 / Math.PI));
 
-            const distance = vx * t;
-            const maxHeight = h0 + (vy * vy) / (2 * g);
-            const landAngle = Math.atan(Math.abs(-g * t + vy) / vx) * (180 / Math.PI);
-
-            // Output metrics
             document.getElementById('out-distance').innerText = distance.toFixed(1) + ' m';
-            document.getElementById('out-max-height').innerText = maxHeight.toFixed(1) + ' m';
-            document.getElementById('out-airtime').innerText = t.toFixed(2) + ' s';
-            document.getElementById('out-land-angle').innerText = Math.round(landAngle) + '°';
+            document.getElementById('out-apex').innerText = apex.toFixed(1) + ' m';
+            document.getElementById('out-airtime').innerText = airtime.toFixed(2) + ' s';
+            document.getElementById('out-landing-angle').innerText = landingAngle + '°';
 
-            // Shaper Guide Specs
-            document.getElementById('build-start-dist').innerText = (distance * 0.9).toFixed(1) + ' m';
-            document.getElementById('build-height').innerText = (h0 * 0.95).toFixed(1) + ' m';
-            document.getElementById('build-length').innerText = (distance * 0.6).toFixed(1) + ' m';
-            document.getElementById('build-slope').innerText = Math.round(landAngle - 5) + '° - ' + Math.round(landAngle + 3) + '°';
-
-            // Badge status
-            const badge = document.getElementById('jump-status-badge');
-            if (distance >= targetGap && distance <= targetGap * 1.25) {
-                badge.className = "px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-neon/10 text-brand-neon border border-brand-neon/30";
-                badge.innerText = "Overshoot Safe / Perfect";
-            } else if (distance < targetGap) {
-                badge.className = "px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-rose-500/10 text-rose-400 border border-rose-500/30";
-                badge.innerText = "Casing Risk (Zu Kurz!)";
+            const badge = document.getElementById('status-badge');
+            if (distance < gap) {
+                badge.className = "px-3 py-1 rounded-full text-xs font-bold bg-red-500/10 text-red-400 border border-red-500/30";
+                badge.innerText = "CASING RISK";
+            } else if (distance > gap + 3.0) {
+                badge.className = "px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30";
+                badge.innerText = "OVERSHOOT";
             } else {
-                badge.className = "px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-amber-400/10 text-amber-400 border border-amber-400/30";
-                badge.innerText = "Overshoot Zone";
+                badge.className = "px-3 py-1 rounded-full text-xs font-bold bg-green-500/10 text-green-400 border border-green-500/30";
+                badge.innerText = "SWEETSPOT";
             }
 
-            // --- LIVE SVG RECALCULATION & MOVEMENT ---
-            // Map distance and height to SVG coordinates (ViewBox width 700, height 220)
-            // Kicker fixed at X=120, ground at Y=170
-            const scaleX = 40; // pixels per meter
-            const scaleY = 30; // pixels per meter
-
-            const startX = 120;
-            const startY = 170 - (h0 * scaleY);
-            
-            const landingPeakX = startX + (targetGap * scaleX);
-            const landingPeakY = 170;
-
-            // Update Kicker shape polygon points
-            const kickerPoly = document.getElementById('svg-kicker');
-            kickerPoly.setAttribute('points', `${startX - 40},170 ${startX},170 ${startX},${startY}`);
-
-            // Update Landing hill polygon points
-            const landingPoly = document.getElementById('svg-landing');
-            const landingBaseW = 60;
-            landingPoly.setAttribute('points', `${landingPeakX - landingBaseW},170 ${landingPeakX + landingBaseW},170 ${landingPeakX},${170 - (h0 * scaleY * 0.9)}`);
-
-            // Update Trajectory Quadratic Curve Path (M startX,startY Q controlX,controlY endX,endY)
-            const controlX = startX + ((targetGap * scaleX) / 2);
-            const peakSvgY = 170 - (maxHeight * scaleY);
-            // Adjust control point higher based on max height
-            const qY = peakSvgY - 20;
             const trajPath = document.getElementById('svg-trajectory');
-            trajPath.setAttribute('d', `M${startX},${startY} Q ${controlX},${qY} ${landingPeakX},${landingPeakY}`);
+            const landingPoly = document.getElementById('svg-landing');
+            
+            const startX = 70;
+            const startY = 170 - (height * 20);
+            const endX = Math.min(550, startX + (distance * 35));
+            const apexY = Math.max(10, 170 - (apex * 30));
+            const apexX = (startX + endX) / 2;
+
+            trajPath.setAttribute('d', `M ${startX} ${startY} Q ${apexX} ${apexY} ${endX} 170`);
+            const landStartX = startX + (gap * 35);
+            landingPoly.setAttribute('points', `${landStartX},170 ${landStartX + 30},120 ${landStartX + 80},170`);
         }
 
-        // --- 2. SPOT MODAL DATA (12+ Bikeparks) ---
-        const spotsData = {
-            wurbauerkogel: {
-                tag: "Bikepark",
-                title: "Bikepark Wurbauerkogel",
-                location: "Windischgarsten, OÖ",
-                desc: "Der Wurbauerkogel bietet eine legendäre Blue Lord Flowline für alle Level, eine technische Pro Line mit knackigen Kickern sowie einen genialen Pumptrack an der Talstation.",
-                length: "3.2 km",
-                elevation: "400 hm",
-                setup: "Reifendruck: 1.8 bar vorne / 2.0 bar hinten. Gabel Zugstufe 5 Klicks offen."
-            },
-            schladming: {
-                tag: "Bikepark",
-                title: "Bikepark Schladming Planai",
-                location: "Steiermark, AT",
-                desc: "Weltcup-Erprobtes Terrain! Die 9 km lange Stadium Flowline und die World Cup Downhill Line fordern Rider aller Klassen heraus. Riesige Tabletop-Jump-Lines.",
-                length: "9.0 km",
-                elevation: "1100 hm",
-                setup: "Reifendruck: 2.0 bar vorne / 2.2 bar hinten mit CushCore Insert."
-            },
-            sattledt: {
-                tag: "Freeride & Dirt",
-                title: "Sattledt Freeride Park",
-                location: "Wels-Land, OÖ",
-                desc: "Reines Erd- und Lehm-Areal mit großen Jumplines, Step-Downs und Slopestyle Dirt-Tables. Absolut keine Holz-Kicker, sondern perfekt geshapete Erd-Absprünge.",
-                length: "1.2 km",
-                elevation: "80 hm",
-                setup: "Reifendruck: 2.4 bar für harte Dirt-Landungen. Single-Speed Hardtail oder 140mm Fully."
-            },
-            saalbach: {
-                tag: "Bikepark",
-                title: "Bikepark Saalbach Hinterglemm",
-                location: "Saalbach, Salzburg",
-                desc: "Epische Trails wie die Pro Line, X-Line und der Hacklberg Trail. Endlose Abfahrten und gigantische Airtime vor traumhaftem Bergpanorama.",
-                length: "18.0 km",
-                elevation: "950 hm",
-                setup: "Reifendruck: 1.9 bar / 2.1 bar. Enduro oder Downhill Bike empfohlen."
-            },
-            leogang: {
-                tag: "Bikepark",
-                title: "Epic Bikepark Leogang",
-                location: "Leogang, Salzburg",
-                desc: "Speedster Downhill, Flying Gangster Freeride & die actiongeladene GoPro Jumpline. Einer der bekanntesten Bikeparks Europas.",
-                length: "8.5 km",
-                elevation: "920 hm",
-                setup: "Reifendruck: 2.1 bar Tubeless. High-Speed Dämpferabstimmung."
-            },
-            semmering: {
-                tag: "Bikepark",
-                title: "Bikepark Zauberberg Semmering",
-                location: "Semmering, Niederösterreich",
-                desc: "Sweet 16 Flowtrail, Family Downhill und eine abwechslungsreiche Freeride Jump-Battery nur eine Stunde von Wien entfernt.",
-                length: "12.0 km",
-                elevation: "400 hm",
-                setup: "Reifendruck: 1.8 bar vorne / 2.0 bar hinten."
-            },
-            wexl: {
-                tag: "Bikepark",
-                title: "Wexl Trails St. Corona",
-                location: "St. Corona, Niederösterreich",
-                desc: "Das Mekka für Flowtrail-Fans und Jumpline-Liebhaber. Perfekt geshapete Lines für Anfänger bis Pros.",
-                length: "15.0 km",
-                elevation: "350 hm",
-                setup: "Reifendruck: 1.7 bar vorne / 1.9 bar hinten für maximalen Grip."
-            },
-            innsbruck: {
-                tag: "Bikepark",
-                title: "Bikepark Innsbruck (Muttereralm)",
-                location: "Innsbruck, Tirol",
-                desc: "The Chainless One, Nazzen Trail und naturbelassene Wurzelpassagen hoch über den Dächern von Innsbruck.",
-                length: "7.0 km",
-                elevation: "900 hm",
-                setup: "Reifendruck: 2.0 bar. Enduro-Setup mit starken Bremsen."
-            },
-            brandnertal: {
-                tag: "Bikepark",
-                title: "Bikepark Brandnertal",
-                location: "Brandnertal, Vorarlberg",
-                desc: "Tschackacka Line, Northshore-Elemente und anspruchsvolle Natur-Downhills in idyllischer Alpenkulisse.",
-                length: "6.5 km",
-                elevation: "750 hm",
-                setup: "Reifendruck: 1.9 bar vorne und hinten."
-            }
-        };
+        ['input-speed', 'input-angle', 'input-height', 'input-gap'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateJumpPhysics);
+        });
 
-        function openSpotModal(key) {
-            const spot = spotsData[key];
-            if (!spot) return;
-            document.getElementById('modal-spot-tag').innerText = spot.tag;
-            document.getElementById('modal-spot-title').innerText = spot.title;
-            document.getElementById('modal-spot-location').innerText = spot.location;
-            document.getElementById('modal-spot-desc').innerText = spot.desc;
-            document.getElementById('modal-spot-length').innerText = spot.length;
-            document.getElementById('modal-spot-elevation').innerText = spot.elevation;
-            document.getElementById('modal-spot-setup').innerText = spot.setup;
-            document.getElementById('spot-modal').classList.remove('hidden');
-            document.getElementById('spot-modal').classList.add('flex');
-        }
-
-        function closeSpotModal() {
-            document.getElementById('spot-modal').classList.remove('flex');
-            document.getElementById('spot-modal').classList.add('hidden');
-        }
-
-        // --- 3. COMMUNITY VOTE SYSTEM (1 Vote per user) ---
-        let userVoted = localStorage.getItem('traillab_voted') === 'true';
-        let votes = { 1: 142, 2: 98, 3: 76 };
-
-        function castVote(optionId) {
-            if (userVoted) {
-                alert('Du hast bereits für einen Spot abgestimmt!');
-                return;
-            }
-            votes[optionId]++;
-            userVoted = true;
-            localStorage.setItem('traillab_voted', 'true');
-            updateVoteBars();
-        }
-
-        function updateVoteBars() {
-            const total = votes[1] + votes[2] + votes[3];
-            for (let i = 1; i <= 3; i++) {
-                const pct = Math.round((votes[i] / total) * 100);
-                document.getElementById(`vote-pct-${i}`).innerText = pct + '%';
-                document.getElementById(`vote-bar-${i}`).style.width = pct + '%';
-                if (userVoted) {
-                    const btn = document.getElementById(`vote-btn-${i}`);
-                    btn.innerText = "Abgestimmt";
-                    btn.disabled = true;
-                    btn.classList.add('opacity-50', 'cursor-not-allowed');
-                }
-            }
-        }
-
-        // --- 4. BIKE FINDER & SETUP RECHNER ---
-        function updateBikeFinder() {
-            const height = parseInt(document.getElementById('finder-height').value);
-            const inseam = parseInt(document.getElementById('finder-inseam').value);
-            const discipline = document.getElementById('finder-discipline').value;
-            const budget = document.getElementById('finder-budget').value;
-
-            document.getElementById('finder-height-val').innerText = height + ' cm';
-            document.getElementById('finder-inseam-val').innerText = inseam + ' cm';
-
-            let size = "M";
-            let reach = 450;
-            if (height < 170) { size = "S"; reach = 430; }
-            else if (height < 182) { size = "L"; reach = 475; }
-            else { size = "XL"; reach = 505; }
-
-            document.getElementById('out-frame-size').innerText = size + ' (' + (height < 170 ? 'Small' : height < 182 ? 'Large' : 'X-Large') + ')';
-            document.getElementById('out-reach').innerText = reach + ' mm';
-
-            let wheelset = "29\" Full";
-            if (discipline === 'freeride' || discipline === 'dh') wheelset = "Mullet (29\" / 27.5\")";
-            else if (discipline === 'dirt') wheelset = "26\" Dirt Spec";
-            document.getElementById('out-wheelset').innerText = wheelset;
-
-            const bikes = {
-                dh: [
-                    { name: "YT Tues Core 2", price: "ca. 3.999 €", desc: "World-Cup bewährter Downhill Bomber mit Fox Performance Fahrwerk." },
-                    { name: "Commencal Supreme V5", price: "ca. 5.499 €", desc: "High-Pivot High-End Downhill Machine für maximale High-Speed Stabilität." }
-                ],
-                freeride: [
-                    { name: "Propain Spindrift 5 AL", price: "ca. 3.400 €", desc: "Customizable Freeride Rig mit massig Federweg und Bikepark DNA." },
-                    { name: "Specialized Status 160", price: "ca. 2.900 €", desc: "Das ultimative Party-Bike für Jumplines und Bikepark Laps." }
-                ],
-                enduro: [
-                    { name: "Canyon Strive CFR", price: "ca. 4.800 €", desc: "Enduro Race Endgegner mit Shapeshifter Technologie." },
-                    { name: "Orbea Rallon M20", price: "ca. 4.200 €", desc: "Vielseitiges Enduro mit Carbon-Rahmen und exzellenter Kletterperformance." }
-                ],
-                trail: [
-                    { name: "Santa Cruz Tallboy", price: "ca. 5.100 €", desc: "Agiles Down-Country & Trail Fully für epische Ausfahrten." },
-                    { name: "Rose Root Miller", price: "ca. 2.999 €", desc: "Preis-Leistungs-Kracher für flowige Trails und alpine Abenteuer." }
-                ],
-                dirt: [
-                    { name: "Rose The Bruce 2", price: "ca. 1.299 €", desc: "Leichtes Dirtjump Alu-Bike mit Pike DJ Gabel." },
-                    { name: "Canyon Stitched 360", price: "ca. 1.099 €", desc: "Der Slopestyle Klassiker für Pumptracks und Dirt Jumps." }
-                ]
-            };
-
-            const list = bikes[discipline] || bikes.freeride;
-            let html = '';
-            list.forEach(b => {
-                html += `
-                    <div class="bg-brand-dark p-4 rounded-2xl border border-brand-border space-y-2 flex flex-col justify-between">
+        function renderSpots() {
+            const container = document.getElementById('spots-container');
+            container.innerHTML = spotsData.map(spot => `
+                <div class="glass-panel p-6 rounded-2xl border border-cyber-border hover:border-cyber-neon/40 transition">
+                    <div class="flex justify-between items-start mb-3">
                         <div>
-                            <div class="flex justify-between items-start">
-                                <span class="font-bold text-white text-sm">${b.name}</span>
-                                <span class="font-mono text-xs text-brand-neon font-bold">${b.price}</span>
-                            </div>
-                            <p class="text-xs text-slate-300 mt-2">${b.desc}</p>
+                            <span class="text-xs text-cyber-neon font-bold uppercase">${spot.region}</span>
+                            <h3 class="text-xl font-bold text-white">${spot.title}</h3>
                         </div>
-                        <span class="text-[10px] text-brand-cyan font-mono"><i class="fa-solid fa-check mr-1"></i>Passend für Größe ${size}</span>
+                        <span class="px-2.5 py-1 bg-cyber-border text-xs rounded-lg text-gray-300">${spot.type}</span>
                     </div>
-                `;
-            });
-            document.getElementById('bike-recommendations-grid').innerHTML = html;
+                    <p class="text-xs text-gray-400 mb-4"><strong>Belag:</strong> ${spot.surface}</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-cyber-border">
+                        <button onclick="voteSpot('${spot.id}')" class="px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-xl text-xs font-bold text-gray-300 hover:text-cyber-neon hover:border-cyber-neon flex items-center gap-1.5">
+                            <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i> <span id="votes-${spot.id}">${spot.votes}</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
         }
 
-        // --- 5. SUSPENSION TUNING LAB ---
-        function calculateSuspension() {
-            const weight = parseInt(document.getElementById('susp-weight').value);
-            const travel = parseInt(document.getElementById('susp-travel').value);
-            const type = document.getElementById('susp-type').value;
+        function voteSpot(id) {
+            const spot = spotsData.find(s => s.id === id);
+            if (spot) {
+                spot.votes++;
+                document.getElementById(`votes-${id}`).innerText = spot.votes;
+            }
+        }
 
-            document.getElementById('susp-weight-val').innerText = weight + ' kg';
-            document.getElementById('susp-travel-val').innerText = travel + ' mm';
+        function renderBikes() {
+            const type = document.getElementById('bike-type').value;
+            const budget = parseFloat(document.getElementById('bike-budget').value) || 99999;
+            const container = document.getElementById('bike-results');
 
-            const forkPsi = Math.round(weight * 1.15 + (travel > 160 ? 5 : 0));
-            const shockPsi = Math.round(weight * 2.2);
-            const reboundClicks = weight > 85 ? 4 : weight < 65 ? 8 : 6;
+            const filtered = bikesData.filter(b => (type === 'all' || b.category === type) && b.price <= budget);
 
+            container.innerHTML = filtered.map(b => `
+                <div class="glass-panel p-5 rounded-xl border border-cyber-border">
+                    <span class="text-[10px] font-bold text-cyber-blue uppercase">${b.category}</span>
+                    <h4 class="text-lg font-bold text-white">${b.name}</h4>
+                    <p class="text-sm text-cyber-neon font-bold mt-2">${b.price} €</p>
+                    <span class="text-xs text-gray-400">Größe: ${b.size}</span>
+                </div>
+            `).join('');
+        }
+
+        ['bike-type', 'bike-budget', 'bike-height'].forEach(id => {
+            document.getElementById(id).addEventListener('change', renderBikes);
+            document.getElementById(id).addEventListener('keyup', renderBikes);
+        });
+
+        function updateSuspension() {
+            const weight = parseFloat(document.getElementById('input-weight').value);
+            const travel = parseFloat(document.getElementById('input-travel').value);
+            const shockType = document.getElementById('shock-type').value;
+
+            document.getElementById('val-weight').innerText = weight + ' kg';
+            document.getElementById('val-travel').innerText = travel + ' mm';
+
+            const forkPsi = Math.round(weight * 1.05);
             document.getElementById('out-fork-psi').innerText = forkPsi + ' PSI';
-            document.getElementById('out-shock-spec').innerText = type === 'air' ? shockPsi + ' PSI' : (weight * 11) + ' lbs Fr. Rate';
-            document.getElementById('out-rebound').innerText = reboundClicks + ' Klicks offen';
+
+            if (shockType === 'air') {
+                const shockPsi = Math.round(weight * 2.2);
+                document.getElementById('out-shock-val').innerText = shockPsi + ' PSI';
+            } else {
+                const springRate = Math.round((weight * 5.5) / 10) * 10;
+                document.getElementById('out-shock-val').innerText = springRate + ' lbs Spring';
+            }
+
+            const rebound = Math.round(-1 * (weight / 12));
+            document.getElementById('out-rebound').innerText = rebound + ' Klicks';
         }
 
-        // --- AUTH SIMULATOR ---
-        function loginWithGoogle() {
-            document.getElementById('auth-status').classList.remove('hidden');
-            document.getElementById('auth-status').classList.add('flex');
-            document.getElementById('google-login-btn').style.display = 'none';
-            document.getElementById('user-name').innerText = 'Pro Rider';
+        ['input-weight', 'input-travel', 'shock-type'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateSuspension);
+            document.getElementById(id).addEventListener('change', updateSuspension);
+        });
+
+        function openAuthModal() {
+            document.getElementById('auth-modal').classList.remove('hidden');
+        }
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+        function simulateGoogleLogin() {
+            document.getElementById('auth-btn-text').innerText = 'Angemeldet';
+            closeAuthModal();
         }
 
-        // Initialize on load
-        window.onload = function() {
-            calculateJump();
-            updateBikeFinder();
-            calculateSuspension();
-            updateVoteBars();
-        };
+        updateJumpPhysics();
+        renderSpots();
+        renderBikes();
+        updateSuspension();
     </script>
 </body>
 </html>
